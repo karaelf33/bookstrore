@@ -2,6 +2,7 @@ package com.example.bookstrore.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.io.Serializable;
 @Table(name = "BOOK")
 @Getter
 @Setter
+@ToString
 public class Book implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -17,13 +19,13 @@ public class Book implements Serializable {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private String id;
+    private Long id;
 
     @Column(name = "BOOK_NAME")
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @Column(name = "BOOK_CATEGORY")
+    @OneToOne
+    @JoinColumn(name = "BOOK_CATEGORY_ID")
     private Category category;
 
     @Column(name = "PRICE")
